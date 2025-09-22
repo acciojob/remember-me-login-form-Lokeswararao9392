@@ -1,16 +1,76 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en">
 <head>
-	<link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login-Form</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            width: 100vw;
+        }
+        .container{
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .form-container{
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .hide{
+         display: none;
+        }
+    </style>
 </head>
-
 <body>
-	<!-- the entire body must be written by student -->
-    <script type="text/javascript" src="./script.js">
-</script>
+    <div class = "container" id = "container">
+        <form class = "form-container">
+           <input type = "text" placeholder="Name" id = "userName">
+           <input type = "email" placeholder="Email" id = "userEmail">
+           <input type = "password" placeholder="Password" id = "userPassword">
+           <input type = "submit" value = "Submit">
+        </form>
+    </div>
+    <h1 class = "hide" id = "message">Hello there</h1>
+    <script>
+        const container = document.getElementById("container")
+        const form = document.querySelector(".form-container") 
+         const message = document.getElementById("message")
 
+         if(localStorage.getItem("email")){
+            // add hide to container (name,email,password)
+            container.classList.add("hide")
+           // remove hide (visible in page) from h1 tag 
+            message.classList.remove("hide")
+            // add text in h1 tag 
+            message.innerText = `Hello ${localStorage.getItem("name")}`
+         }
+
+        form.addEventListener("submit",onSubmit)
+
+        function onSubmit(e){
+           e.preventDefault()
+           // conasole.log(e,"event form")
+
+            const name = document.getElementById("userName").value
+            const email = document.getElementById("userEmail").value
+            const password = document.getElementById("userPassword").value
+
+          // Store name of user (using localStorage Method)
+          localStorage.setItem("name",name)
+
+          // Store email of user
+          localStorage.setItem("email",email)
+
+          // Store password of user
+          localStorage.setItem("password",password)
+
+        }
+    </script>
 </body>
-
 </html>
